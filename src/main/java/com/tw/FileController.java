@@ -14,6 +14,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 @Controller
 public class FileController {
@@ -29,7 +30,8 @@ public class FileController {
     public FileSystemResource download(HttpServletResponse response) throws IOException {
         String fileName = "test.jar";
         String filePath = "/Users/bfeng/H5/" + fileName;
-        response.setHeader("Content-disposition", "attachment; filename=" + fileName);
+        String contentDisposition = "attachment; filename*=UTF-8''" + URLEncoder.encode("知乎", "UTF-8");
+        response.setHeader("Content-disposition", contentDisposition);
         return new FileSystemResource(filePath);
     }
 
